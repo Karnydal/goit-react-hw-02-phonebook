@@ -1,31 +1,31 @@
 import PropTypes from 'prop-types';
-import { List, ContactCard, Name, Number, DeleteBtn } from './ContactList.styled';
-
+import { List } from './ContactList.styled';
+import { ContactCard } from '../ContactCard/ContactCard';
 export const ContactList = ({ contacts, onDeleleButton }) => {
-    return (
-        <List>
-            {contacts.map(({ name, id, number }) => {
-                return (
-                    <ContactCard key={id}>
-                        <Name>{name}</Name>
-                        <Number>{number}</Number>
-                        <DeleteBtn type="button" id={id} onClick={onDeleleButton}>
-                            Delete
-                        </DeleteBtn>
-                    </ContactCard>
-                )
-            })}
-        </List>
-    )
+  return (
+    <List>
+      {contacts.map(({ name, id, number }) => {
+        return (
+          <ContactCard
+                key={id}
+                id={id}
+            name={name}
+            number={number}
+            onDeleleButton={onDeleleButton}
+          />
+        );
+      })}
+    </List>
+  );
 };
 
 ContactList.prototypes = {
-    contacts: PropTypes.arrayOf(
-        PropTypes.exact({
-            id: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired,
-            number: PropTypes.string.isRequired,
-        })
-    ),
-    onDeleleButton: PropTypes.func.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.exact({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+  onDeleleButton: PropTypes.func.isRequired,
 };
